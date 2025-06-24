@@ -19,7 +19,7 @@ RUN mkdir ~/.vnc && \
 
 # Init script
 COPY start-desktop.sh /home/poduser/start-desktop.sh
-RUN chmod +x start-desktop.sh
+RUN chmod +x /home/poduser/start-desktop.sh
 
 ENTRYPOINT ["./start-desktop.sh"]
 CMD []
