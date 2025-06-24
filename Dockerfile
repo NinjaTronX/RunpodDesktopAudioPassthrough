@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-# Install desktop, VNC, browser, audio tools
+# Install desktop, VNC, browser, audio tools test
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     xfce4 xfce4-terminal \
     tigervnc-standalone-server tigervnc-common \
