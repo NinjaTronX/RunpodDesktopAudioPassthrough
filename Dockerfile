@@ -12,9 +12,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 # Install real Firefox (non-Snap version)
 RUN mkdir -p /opt/firefox && \
-    curl -L https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US \
-    | tar xjf - -C /opt/firefox --strip-components=1 && \
-    ln -s /opt/firefox/firefox /usr/local/bin/firefox
+    curl -Lo /tmp/firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" && \
+    tar xjf /tmp/firefox.tar.bz2 -C /opt/firefox --strip-components=1 && \
+    ln -s /opt/firefox/firefox /usr/local/bin/firefox && \
+    rm /tmp/firefox.tar.bz2
 
 # Create poduser with sudo and a password
 RUN useradd -m -s /bin/bash poduser && echo "poduser:podpass" | chpasswd && \
