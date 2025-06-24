@@ -10,12 +10,12 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     websockify novnc \
     && rm -rf /var/lib/apt/lists/*
 
-# Install real Firefox (non-Snap version)
+# Install real Firefox (non-Snap)
 RUN mkdir -p /opt/firefox && \
-    curl -Lo /tmp/firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US" && \
-    tar xjf /tmp/firefox.tar.bz2 -C /opt/firefox --strip-components=1 && \
-    ln -s /opt/firefox/firefox /usr/local/bin/firefox && \
-    rm /tmp/firefox.tar.bz2
+    curl -L -o /tmp/firefox.tar.bz2 "https://ftp.mozilla.org/pub/firefox/releases/latest/linux-x86_64/en-US/firefox-*.tar.bz2" && \
+    tar -xjf /tmp/firefox.tar.bz2 -C /opt/firefox --strip-components=1 && \
+    ln -sf /opt/firefox/firefox /usr/local/bin/firefox && \
+    rm -f /tmp/firefox.tar.bz2
 
 # Create poduser with sudo and a password
 RUN useradd -m -s /bin/bash poduser && echo "poduser:podpass" | chpasswd && \
